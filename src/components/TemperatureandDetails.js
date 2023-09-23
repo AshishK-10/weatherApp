@@ -14,7 +14,7 @@ function TemperatureandDetails({weather: {details, icon, temp, temp_min, temp_ma
         <p>{details}</p>
       </div>
       <div className='flex flex-row justify-between items-center text-white py-3'>
-        <img src = {getIcon(icon)} className='w-20'/>
+        <img src = {getIcon(icon)} className='w-20' alt=''/>
         <p className=' text-5xl'>{`${temp.toFixed(0)}°`}</p>
         <div className='flex flex-col space-y-2'>
           {

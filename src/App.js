@@ -5,10 +5,10 @@ import TimeandLocation from './components/TimeandLocation';
 import TemperatureandDetails from './components/TemperatureandDetails';
 import Forcast from './components/Forcast';
 import {getWeather} from './weatherApiFunctions/weatherApi';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { toFormData } from 'axios';
+
 
 function App() {
 
@@ -24,20 +24,19 @@ function App() {
   const [query, setQuery] = useState({q: 'delhi'});
   const [units, setUnits] = useState('metric');
   const [weather, setWeather] = useState(null)
-  const [isCoord, setIsCoord] = useState(false)
+  const isCoordRef = useRef(false);
 
   useEffect(()=>{
     async function getWeatherData(){
 
       let message = query.q ? query.q : 'current location.'
-      console.log(message)
       toast.info(`Featching weather for ${message}`)
 
-      if(isCoord){
+      if(isCoordRef.current){
         await fetchWeather({...query, units}, true).then((res)=>{
           setWeather(res);
+          isCoordRef.current = true;
         })
-        setIsCoord(false);
       }else{
         await fetchWeather({...query, units}).then((res)=>{
           setWeather(res);
@@ -59,7 +58,7 @@ function App() {
     <div className="App justify-center min-h-screen min-w-min">
       <div className= {`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br ${formatBackground()} h-fit shadow-xl shadow-gray-400`}>
         <TopButton setQuery = {setQuery}/>
-        <Input setQuery = {setQuery} units = {units} setUnits = {setUnits} setIsCoord = {setIsCoord}/>
+        <Input setQuery = {setQuery} units = {units} setUnits = {setUnits} isCoordRef = {isCoordRef}/>
         {
         weather && (
           <div>

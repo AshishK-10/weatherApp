@@ -14,7 +14,7 @@ function Forcast({title, items, icon}) {
             return(
               <div className='flex flex-col items-center justify-center' key={index}>
                 <p className='font-light text-sm'>{item.daytime}</p>
-                <img src = {getIcon(icon)} className='w-12 my-1'/>
+                <img src = {getIcon(icon)} className='w-12 my-1' alt=''/>
                 <p className='font-medium'>{`${item.temp.toFixed()}°`}</p>
               </div>
             )

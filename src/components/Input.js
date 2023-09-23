@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { UilSearch, UilLocationPoint,  } from '@iconscout/react-unicons'
 
-export default function Input({setQuery, units, setUnits, setIsCoord}) {
+export default function Input({setQuery, units, setUnits, isCoordRef}) {
   const [city, setCity] = useState('')
 
   const HandleSearchCity = ()=>{
-    if(city != '') setQuery({q: city})
+    if(city !== '') setQuery({q: city})
   }
 
   const HandleLocation = ()=>{
@@ -13,7 +13,7 @@ export default function Input({setQuery, units, setUnits, setIsCoord}) {
       navigator.geolocation.getCurrentPosition((position) => {
         let lat = position.coords.latitude
         let lon = position.coords.longitude
-        setIsCoord(true)
+        isCoordRef.current = true
         setQuery({
           lat,
           lon
@@ -35,6 +35,7 @@ export default function Input({setQuery, units, setUnits, setIsCoord}) {
         <input type = "text"
          value={city}
          onChange={(e)=>setCity(e.target.value)}
+         name='location-input'
          className='text-md font-light p-2 w-full shadow-xl focus:outline-none capitalize placeholder:lowercase'
           placeholder='search city...'
         />
