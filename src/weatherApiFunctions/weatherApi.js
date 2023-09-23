@@ -78,7 +78,7 @@ const getDay = (dateString)=>{
 }
 
 const getTime = (time24)=>{
-  const [hours, minutes, secs] = time24.split(':').map(Number);
+  const [hours, minutes] = time24.split(':').map(Number);
   const period = hours >= 12 ? 'PM' : 'AM';
   const hours12 = hours % 12 === 0 ? 12 : hours % 12;
   const time12 = `${hours12}:${String(minutes).padStart(2, '0')} ${period}`;

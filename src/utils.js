@@ -5,7 +5,7 @@ import { UilArrowUp,
   UilTear,
   UilWind,
   UilSun,
-  UilSunset } from '@iconscout/react-unicons'
+ } from '@iconscout/react-unicons'
 import { formatToLocalTime } from './weatherApiFunctions/weatherApi';
 
 function utils(){
